@@ -3,3 +3,11 @@ this is added grom GitHub Web GUI
 Below command copies repository to local system from given URL
 
 git clone https://github.com/bazimov/webapp.git
+
+git pull syncs local repo with remote repo
+
+git remote -v   - lists remote repos
+git status - shows current status
+git add .  - adds new files to repo index
+git commit -m "some message here"  commits any changes to local repo
+git push  - sends updates to remote repo and updates.
