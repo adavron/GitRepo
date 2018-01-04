@@ -1,2 +1,5 @@
 git clone
 this is added grom GitHub Web GUI
+Below command copies repository to local system from given URL
+
+git clone https://github.com/bazimov/webapp.git
