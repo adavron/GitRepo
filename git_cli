@@ -1,10 +1,53 @@
-git clone
-this is added grom GitHub Web GUI
+http://kbroman.org/github_tutorial/pages/fork.html
+
+A new repo from scratch
+========================
+Say you’ve just got some data from a collaborator and are about to start exploring it.
+
+Create a directory to contain the project.
+Go into the new directory.
+Type:
+
+#  git init.   This makes that(current) directory GIT Repo
+
+Write some code.
+Type:
+
+#  git add       to add the files (see the typical use page).
+
+Type:
+#  git commit -m "some message"     adds all added content into Repo
+
+=========================================================================
+Connect it to github
+=====================
+You’ve now got a local git repository. You can use git locally, like that, if you want. 
+But if you want the thing to have a home on github, do the following.
+
+Go to github.
+Log in to your account.
+Click the new repository button in the top-right. 
+You’ll have an option there to initialize the repository with a README file.
+Click the “Create repository” button.
+Now, follow the second set of instructions, 
+
+“Push an existing repository…”
+On your local repo:
+
+# git remote add origin git@github.com:username/new_repo
+# git push -u origin master
+
+=====================================================================================
+
+git config --global user.name "John Doe"
+git config --global user.email johndoe@example.com
+
+
 Below command copies repository to local system from given URL
 
-git clone https://github.com/bazimov/webapp.git
+  git clone https://github.com/bazimov/webapp.git
 
-git pull syncs local repo with remote repo
+  git pull    -syncs local repo with remote repo
 
 git remote -v   - lists remote repos
 git status - shows current status
