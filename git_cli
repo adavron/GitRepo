@@ -1,8 +1,7 @@
 http://kbroman.org/github_tutorial/pages/fork.html
-
-A new repo from scratch
-========================
-Say you’ve just got some data from a collaborator and are about to start exploring it.
+=====================================
+A new repo from scratch on local VM
+=====================================
 
 Create a directory to contain the project.
 Go into the new directory.
@@ -10,17 +9,19 @@ Type:
 
 #  git init.   This makes that(current) directory GIT Repo
 
-Write some code.
-Type:
+  Write some code.
+  Type:
 
 #  git add       to add the files (see the typical use page).
 
-Type:
+  Type:
 #  git commit -m "some message"     adds all added content into Repo
 
-=========================================================================
+
+=====================
 Connect it to github
 =====================
+
 You’ve now got a local git repository. You can use git locally, like that, if you want. 
 But if you want the thing to have a home on github, do the following.
 
@@ -37,15 +38,20 @@ On your local repo:
 # git remote add origin git@github.com:username/new_repo
 # git push -u origin master
 
-=====================================================================================
 
-git config --global user.name "John Doe"
-git config --global user.email johndoe@example.com
+                            git config --global user.name "John Doe"
+                            git config --global user.email johndoe@example.com
 
+==============================================================
+ To copy existing repository from GitHub to your local VM:
+=============================================================
 
-Below command copies repository to local system from given URL
+create ssh-key on your vm and add it on githubs ssh keys list.
+then do:
 
   git clone https://github.com/bazimov/webapp.git
+
+to sync changes later, you can use git pull command
 
   git pull    -syncs local repo with remote repo
 
