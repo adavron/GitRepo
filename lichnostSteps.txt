@@ -1,0 +1,101 @@
+INSTALL MariaDb
+
+yum -y install mariadb mariadb-server
+systemctl start mariadb
+systemctl enable mariadb
+mysql_secure_installation
+Y
+(and setup root password when promted)
+
+
+INSTALL NGINX
+
+rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
+yum -y install nginx
+systemctl restart nginx
+systemctl enable nginx
+
+
+INSTALL PHP
+
+yum -y install php-fpm php-mysql php-cli
+
+vi /etc/hosts
+127.0.0.1               localhost.localdomain localhost server.lichnost.org
+
+systemctl restart nginx
+systemctl restart php-fpm
+systemctl enable php-fpm
+
+
+CONFIGURE NGINX VIRTUAL HOST
+
+vi /etc/nginx/conf.d/wordpress.conf
+
+server {
+        listen 80;
+        server_name lichnost.org;
+
+        access_log /var/log/nginx/access.log;
+        error_log /var/log/nginx/error.log;
+
+        root /usr/share/nginx/lichnost.org;
+        index index.php;
+
+	location / {
+            try_files $uri $uri/ /index.php?$args ;
+	}
+
+location ~ .php$ {
+        fastcgi_pass  127.0.0.1:9000;  # port where FastCGI processes were spawned
+        fastcgi_index  index.php;
+        fastcgi_param  SCRIPT_FILENAME   /usr/share/nginx/lichnost.org$fastcgi_script_name;  # same path as above
+        fastcgi_param PATH_INFO               $fastcgi_script_name;
+        include /etc/nginx/fastcgi_params;
+        }
+}
+
+
+
+mkdir /usr/share/nginx/lichnost.org/
+mkdir /usr/share/nginx/lichnost.org/logs
+
+systemctl restart nginx
+systemctl restart php-fpm
+
+
+
+CREATE DATABASE:
+
+mysql -u root -p
+CREATE DATABASE wordpress;
+CREATE USER 'wpuser'@'localhost' IDENTIFIED BY 'wppassword';
+GRANT ALL PRIVILEGES ON wordpress.* TO 'wpuser'@'localhost';
+exit
+
+
+CONFIGURE WORDPRESS
+
+wget http://wordpress.org/latest.tar.gz
+tar -zxvf latest.tar.gz
+mv wordpress/* /usr/share/nginx/lichnost.org/
+cp /usr/share/nginx/lichnost.org/wp-config-sample.php /usr/share/nginx/lichnost.org/wp-config.php
+
+vi /usr/share/nginx/lichnost.org/wp-config.php
+
+Modified entries according to the created database user and database will look like this.
+
+// ** MySQL settings - You can get this info from your web host ** //
+/** The name of the database for WordPress */
+define('DB_NAME', 'wordpress');
+/** MySQL database username */
+define('DB_USER', 'wpuser');
+/** MySQL database password */
+define('DB_PASSWORD', 'wppassword');
+/** MySQL hostname */
+define('DB_HOST', 'localhost');
+
+chown -R nginx:nginx /usr/share/nginx/lichnost.org/
+
+
+INSTALL WORDPRESS USING BROWSER
