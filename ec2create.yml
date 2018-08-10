@@ -41,7 +41,7 @@
           Name: awslabserever3
           Owner: Azizbek
         monitoring: no
-        vpc_subnet_id: subnet-c1e0ad8c
+        vpc_subnet_id: put here your subnet ID
         assign_public_ip: yes
         group: Azi_sec_group
       register: ec2_out
