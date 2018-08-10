@@ -2,6 +2,7 @@
 ##Creates a custom securty group
 #spinsup new EC2 Instances
 #waits for ssh to become active on instance
+# to run this do:   ansible-playbook ec2create.yml
 
 
 
