@@ -3,7 +3,13 @@
 #spinsup new EC2 Instances
 #waits for ssh to become active on instance
 # to run this do:   ansible-playbook ec2create.yml
-
+#
+#To use aws pem key use below options, even if new user(bek) is created inside EC2 instance
+# id_rsa privet file needs to be renamed to rd_rsa.pem and that needs to be used each time to log in.
+#
+#/etc/ansible/hosts    file has to have list of hosts
+#ansible-playbook usermanagement.yaml --user=ec2-user --private-key=/root/AWS/testweb.pem
+#ansible labservers -m shell -a "uptime" --private-key=/root/AWS/testweb.pem -u ec2-user
 
 
 
