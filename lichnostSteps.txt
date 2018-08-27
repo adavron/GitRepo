@@ -1,23 +1,33 @@
 INSTALL MariaDb
-
+--------------------------------------------------------------
 yum -y install mariadb mariadb-server
 systemctl start mariadb
 systemctl enable mariadb
+
 mysql_secure_installation
-Y
-(and setup root password when promted)
+ 
+  Y
+  Set root password? [Y/n] y
+  (and setup root password when promted)
+  Remove anonymous users? [Y/n] y
+  Disallow root login remotely? [Y/n] y
+  Remove test database and access to it? [Y/n] y
+  Reload privilege tables now? [Y/n] y
+  Thanks for using MariaDB!
+--------------------------------------------------------------
 
 
 INSTALL NGINX
-
+-----------------------------------------------------------------------------------------------------
 rpm -Uvh http://nginx.org/packages/centos/7/noarch/RPMS/nginx-release-centos-7-0.el7.ngx.noarch.rpm
 yum -y install nginx
 systemctl restart nginx
 systemctl enable nginx
+-----------------------------------------------------------------------------------------------------
 
 
 INSTALL PHP
-
+----------------------------------------------------------------------------------------------
 yum -y install php-fpm php-mysql php-cli
 
 vi /etc/hosts
@@ -26,10 +36,12 @@ vi /etc/hosts
 systemctl restart nginx
 systemctl restart php-fpm
 systemctl enable php-fpm
+----------------------------------------------------------------------------------------------
+
 
 
 CONFIGURE NGINX VIRTUAL HOST
-
+-----------------------------------------------------------------------------------------------
 vi /etc/nginx/conf.d/wordpress.conf
 
 server {
@@ -55,7 +67,7 @@ location ~ .php$ {
         }
 }
 
-
+--------------------------------------------------------------------------------------------------
 
 mkdir /usr/share/nginx/lichnost.org/
 mkdir /usr/share/nginx/lichnost.org/logs
@@ -63,19 +75,23 @@ mkdir /usr/share/nginx/lichnost.org/logs
 systemctl restart nginx
 systemctl restart php-fpm
 
+------------------------------------------
 
 
 CREATE DATABASE:
 
+---------------------------------------------------------------------
 mysql -u root -p
 CREATE DATABASE wordpress;
 CREATE USER 'wpuser'@'localhost' IDENTIFIED BY 'wppassword';
 GRANT ALL PRIVILEGES ON wordpress.* TO 'wpuser'@'localhost';
 exit
+----------------------------------------------------------------------
+
 
 
 CONFIGURE WORDPRESS
-
+----------------------------------------------------------------------------------------------------
 wget http://wordpress.org/latest.tar.gz
 tar -zxvf latest.tar.gz
 mv wordpress/* /usr/share/nginx/lichnost.org/
@@ -99,3 +115,4 @@ chown -R nginx:nginx /usr/share/nginx/lichnost.org/
 
 
 INSTALL WORDPRESS USING BROWSER
+--------------------------------------------------------------------------------------------------
