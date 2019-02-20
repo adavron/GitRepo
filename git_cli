@@ -42,14 +42,21 @@ On your local repo:
                             git config --global user.name "John Doe"
                             git config --global user.email johndoe@example.com
 
+
+
+**************************************************************
 ==============================================================
- To copy existing repository from GitHub to your local VM:
+ To Clone/copy existing repository from GitHub to your local VM:
 =============================================================
+
 
 create ssh-key on your vm and add it on githubs ssh keys list.
 then do:
 
-  git clone https://github.com/bazimov/webapp.git
+	git clone git@github.com:githubbek/bash
+
+or clone it using https:
+	git clone https://github.com/bazimov/webapp.git
 
 to sync changes later, you can use git pull command
 
